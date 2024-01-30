@@ -11,12 +11,13 @@
 
 	<groupId>com.micro-food</groupId>
 	<artifactId>payments</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>payments</name>
 	<description>Payments microservice</description>
 
 	<properties>
 		<java.version>17</java.version>
+		<modelmapper.version>3.1.1</modelmapper.version>
 	</properties>
 
 	<dependencies>
@@ -39,6 +40,11 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-mysql</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${modelmapper.version}</version>
 		</dependency>
 
 		<dependency>
