@@ -3,7 +3,6 @@ eureka:
     serviceUrl:
       defaultZone: http://${DISCOVERY_HOST:discovery}:8081/eureka
 
-
 server:
   error:
     include-message: always
