@@ -1,0 +1,19 @@
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://${DISCOVERY_HOST:discovery}:8081/eureka
+
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: discovery
+    timezone: ${TIMEZONE:America/Sao_Paulo}
+  output:
+    ansi:
+      enabled: ALWAYS

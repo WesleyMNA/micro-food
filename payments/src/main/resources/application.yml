@@ -1,8 +1,14 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${DISCOVERY_HOST:discovery}:8081/eureka
+
+
 server:
   error:
     include-message: always
     include-binding-errors: always
-  port: 8080
+  port: 0
   servlet:
     context-path: /api/payments
   tomcat:
