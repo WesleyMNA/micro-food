@@ -4,6 +4,7 @@ import com.microfood.payments.dtos.PaymentDto;
 import com.microfood.payments.services.PaymentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class PaymentController {
     private final PaymentService service;
 
     @GetMapping
-    public ResponseEntity<Page<PaymentDto>> findAll(Pageable pageable) {
+    public ResponseEntity<Page<PaymentDto>> findAll(@ParameterObject Pageable pageable) {
         Page<PaymentDto> response = service.findAll(pageable);
         return ResponseEntity.ok(response);
     }

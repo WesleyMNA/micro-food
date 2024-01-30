@@ -16,14 +16,17 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "value", nullable = false)
     private BigDecimal value;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "expiration")
+    @Column(name = "expiration", nullable = false)
     private String expiration;
-    @Column(name = "code")
+    @Column(name = "number", nullable = false)
+    private String number;
+    @Column(name = "code", nullable = false)
     private String code;
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -31,5 +34,5 @@ public class Payment {
     @Column(name = "order_id", nullable = false)
     private Long orderId;
     @Column(name = "payment_type_id", nullable = false)
-    private Long paymentTypeIdd;
+    private Long paymentTypeId;
 }
