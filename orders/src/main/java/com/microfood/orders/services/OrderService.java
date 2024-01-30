@@ -43,7 +43,7 @@ public class OrderService {
         repository.save(order);
     }
 
-    public void aprovePayment(Long id) {
+    public void approvePayment(Long id) {
         Order order = repository
                 .findById(id)
                 .orElseThrow();
