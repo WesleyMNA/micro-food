@@ -1,0 +1,33 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${DISCOVERY_HOST:discovery}:8081/eureka
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+  port: 0
+  servlet:
+    context-path: /api/orders
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: orders
+    timezone: ${TIMEZONE:America/Sao_Paulo}
+  datasource:
+    url: jdbc:mysql://${MARIADB_HOST:db}:${MARIADB_PORT:3306}/${PAYMENT_MARIADB_NAME:mf_orders}?createDatabaseIfNotExist=true
+    username: ${MARIADB_USER:root}
+    password: ${MARIADB_ROOT_PASSWORD:root}
+  jmx:
+    enabled: true
+  jpa:
+    open-in-view: true
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  output:
+    ansi:
+      enabled: ALWAYS
