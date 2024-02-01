@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.microfood</groupId>
+	<groupId>com.micro-food</groupId>
 	<artifactId>gateway</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>gateway</name>
-	<description>API gateway</description>
+	<version>0.0.1</version>
+	<name>discovery</name>
+	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>17</java.version>
@@ -23,7 +23,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-gateway-mvc</artifactId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -36,7 +36,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -57,7 +56,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>
@@ -68,4 +66,5 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
 </project>

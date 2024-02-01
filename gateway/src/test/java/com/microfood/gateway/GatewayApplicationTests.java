@@ -1,4 +1,6 @@
-package com.microfood.gateway;
+package com.microfood.gateway
+
+-food.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
