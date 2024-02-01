@@ -50,4 +50,12 @@ public class PaymentService {
         repository.save(payment);
         orderClient.approvePayment(payment.getId());
     }
+
+    public void changeStatus(Long id) {
+        Payment payment = repository
+                .findById(id)
+                .orElseThrow();
+        payment.setStatus(Status.CONFIRMED_PENDING_INTEGRATION);
+        repository.save(payment);
+    }
 }

@@ -2,6 +2,7 @@ package com.microfood.payments.controllers;
 
 import com.microfood.payments.dtos.PaymentDto;
 import com.microfood.payments.services.PaymentService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
@@ -45,9 +46,17 @@ public class PaymentController {
                 .build();
     }
 
+    @CircuitBreaker(name = "approvePayment", fallbackMethod = "approvePaymentWithPendingIntegration")
     @PatchMapping("/{id}/approve")
     public ResponseEntity<Void> approvePayment(@PathVariable Long id) {
         service.approvePayment(id);
+        return ResponseEntity
+                .noContent()
+                .build();
+    }
+
+    public ResponseEntity<Void> approvePaymentWithPendingIntegration(Long id, Exception e) {
+        service.changeStatus(id);
         return ResponseEntity
                 .noContent()
                 .build();

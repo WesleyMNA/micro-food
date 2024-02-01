@@ -3,6 +3,14 @@ eureka:
     serviceUrl:
       defaultZone: http://${DISCOVERY_HOST:discovery}:8081/eureka
 
+resilience4j:
+  circuitbreaker:
+    instances:
+      approvePayment:
+        minimumNumberOfCalls: 2
+        slidingWindowSize: 3
+        waitDurationInOpenState: 50s
+
 server:
   error:
     include-message: always
