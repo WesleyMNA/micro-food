@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@FeignClient("orders")
+@FeignClient("mf-orders")
 public interface OrderClient {
 
     @PutMapping("/v1/orders/{id}/approve-payment")
