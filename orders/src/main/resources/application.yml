@@ -1,21 +1,19 @@
 eureka:
   client:
-    service-url:
+    serviceUrl:
       defaultZone: http://${DISCOVERY_HOST:discovery}:8081/eureka
 
 server:
   error:
     include-message: always
     include-binding-errors: always
-  port: 0
-  servlet:
-    context-path: /api/orders
+  port: 9000
   tomcat:
     uri-encoding: UTF-8
 
 spring:
   application:
-    name: orders
+    name: mf-orders
     timezone: ${TIMEZONE:America/Sao_Paulo}
   datasource:
     url: jdbc:mysql://${MARIADB_HOST:db}:${MARIADB_PORT:3306}/${PAYMENT_MARIADB_NAME:mf_orders}?createDatabaseIfNotExist=true

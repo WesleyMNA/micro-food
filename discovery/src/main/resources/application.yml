@@ -1,14 +1,21 @@
 eureka:
   client:
-    fetch-registry: false
     register-with-eureka: false
-    service-url:
+    fetch-registry: false
+    serviceUrl:
       defaultZone: http://${DISCOVERY_HOST:discovery}:8081/eureka
 
+logging:
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss.SSS,${TIMEZONE:America/Sao_Paulo}
+  level:
+    root: ${LOG_LEVEL:info}
+
 server:
+  error:
+    include-message: always
+    include-binding-errors: always
   port: 8081
-  tomcat:
-    uri-encoding: UTF-8
 
 spring:
   application:

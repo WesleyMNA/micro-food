@@ -1,5 +1,6 @@
 package com.microfood.payments.services;
 
+import com.microfood.payments.clients.OrderClient;
 import com.microfood.payments.dtos.PaymentDto;
 import com.microfood.payments.models.Payment;
 import com.microfood.payments.models.Status;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class PaymentService {
 
     private final PaymentRepository repository;
+    private final OrderClient orderClient;
     private final ModelMapper mapper;
 
     public Page<PaymentDto> findAll(Pageable pageable) {
@@ -38,5 +40,14 @@ public class PaymentService {
 
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public void approvePayment(Long id) {
+        Payment payment = repository
+                .findById(id)
+                .orElseThrow();
+        payment.setStatus(Status.CONFIRMED);
+        repository.save(payment);
+        orderClient.approvePayment(payment.getId());
     }
 }
