@@ -7,9 +7,12 @@ import com.microfood.payments.models.Status;
 import com.microfood.payments.repositories.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import static com.microfood.payments.amqp.PaymentAmqpConfig.QUEUE_NAME;
 
 @RequiredArgsConstructor
 @Service
@@ -17,6 +20,7 @@ public class PaymentService {
 
     private final PaymentRepository repository;
     private final OrderClient orderClient;
+    private final RabbitTemplate rabbitTemplate;
     private final ModelMapper mapper;
 
     public Page<PaymentDto> findAll(Pageable pageable) {
@@ -29,7 +33,9 @@ public class PaymentService {
         Payment payment = mapper.map(dto, Payment.class);
         payment.setStatus(Status.CREATED);
         repository.save(payment);
-        return mapper.map(payment, PaymentDto.class);
+        PaymentDto response = mapper.map(payment, PaymentDto.class);
+        rabbitTemplate.convertAndSend(QUEUE_NAME, response);
+        return response;
     }
 
     public void update(Long id, PaymentDto dto) {
