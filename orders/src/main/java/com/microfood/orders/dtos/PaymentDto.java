@@ -1,6 +1,5 @@
-package com.microfood.payments.dtos;
+package com.microfood.orders.dtos;
 
-import com.microfood.payments.models.Status;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -31,7 +30,7 @@ public class PaymentDto {
     @NotBlank
     @NotNull
     private String code;
-    private Status status;
+    private StatusPayment status;
     @NotNull
     private Long orderId;
     @NotNull

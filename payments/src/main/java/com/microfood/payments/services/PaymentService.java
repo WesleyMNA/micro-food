@@ -12,7 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import static com.microfood.payments.amqp.PaymentAmqpConfig.QUEUE_NAME;
+import static com.microfood.payments.amqp.PaymentAmqpConfig.EXCHANGE_NAME;
+
 
 @RequiredArgsConstructor
 @Service
@@ -34,7 +35,7 @@ public class PaymentService {
         payment.setStatus(Status.CREATED);
         repository.save(payment);
         PaymentDto response = mapper.map(payment, PaymentDto.class);
-        rabbitTemplate.convertAndSend(QUEUE_NAME, response);
+        rabbitTemplate.convertAndSend(EXCHANGE_NAME, "", response);
         return response;
     }
 
