@@ -1,0 +1,44 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${DISCOVERY_HOST:discovery}:8081/eureka
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      approvePayment:
+        minimumNumberOfCalls: 2
+        slidingWindowSize: 3
+        waitDurationInOpenState: 50s
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+  port: 9001
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: mf-ratings
+    timezone: ${TIMEZONE:America/Sao_Paulo}
+  datasource:
+    url: jdbc:mysql://${MARIADB_HOST:db}:${MARIADB_PORT:3306}/${RATING_MARIADB_NAME:mf_ratings}?createDatabaseIfNotExist=true
+    username: ${MARIADB_USER:root}
+    password: ${MARIADB_ROOT_PASSWORD:root}
+  jmx:
+    enabled: true
+  jpa:
+    open-in-view: true
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  rabbitmq:
+    host: ${RABBIT_HOST:rabbitmq}
+    port: {$RABBIT_PORT:5672}
+    username: ${RABBIT_USERNAME:guest}
+    password: ${RABBIT_PASSWORD:guest}
+  output:
+    ansi:
+      enabled: ALWAYS
