@@ -14,10 +14,14 @@ public class RatingAmqpConfig {
 
     public static final String QUEUE_NAME = "payments.rating-details";
     public static final String EXCHANGE_NAME = "payment.ex";
+    public static final String DLX_NAME = "payments.dlx";
 
     @Bean
     public Queue createQueue() {
-        return new Queue(QUEUE_NAME, false);
+        return QueueBuilder
+                .nonDurable(QUEUE_NAME)
+                .deadLetterExchange(DLX_NAME)
+                .build();
     }
 
     @Bean
@@ -32,6 +36,27 @@ public class RatingAmqpConfig {
         return BindingBuilder
                 .bind(createQueue())
                 .to(fanoutExchange());
+    }
+
+    @Bean
+    public FanoutExchange deadLetterExchange() {
+        return ExchangeBuilder
+                .topicExchange(DLX_NAME)
+                .build();
+    }
+
+    @Bean
+    public Queue createDeadLetterQueue() {
+        return QueueBuilder
+                .durable("payments.rating-details-dlq")
+                .build();
+    }
+
+    @Bean
+    public Binding bindDeadLetterQueue() {
+        return BindingBuilder
+                .bind(createDeadLetterQueue())
+                .to(deadLetterExchange());
     }
 
     @Bean
